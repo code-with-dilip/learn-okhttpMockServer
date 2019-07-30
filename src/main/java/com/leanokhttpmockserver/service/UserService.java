@@ -13,7 +13,7 @@ import static com.leanokhttpmockserver.constants.OkHttpMockWebServerConstants.*;
 
 
 public class UserService {
-    private String url;
+    private String url = "http://some/uri";
     private WebClient webClient;
 
     public UserService(String _url, WebClient _webClient) {
@@ -21,14 +21,24 @@ public class UserService {
         this.webClient = _webClient;
     }
 
+    public UserService(WebClient _webClient) {
+        this.webClient = _webClient;
+    }
+
 
     public User getUserByName(String name) {
 
-        URI uri = UriComponentsBuilder.fromUriString(url+USER_URL)
+        String uri = UriComponentsBuilder.fromUriString(url+USER_URL)
                 .queryParam("name",name)
                 .buildAndExpand()
-                .toUri();
+                .toUri().toString();
         System.out.println("uri : " + uri);
+        WebClient.RequestHeadersUriSpec requestHeadersUriSpec = webClient.get();
+        User user = requestHeadersUriSpec.uri(uri)
+                .retrieve()
+                .bodyToMono(User.class)
+                .block();
+
         return webClient.get().uri(uri)
                 .retrieve()
                 .bodyToMono(User.class)

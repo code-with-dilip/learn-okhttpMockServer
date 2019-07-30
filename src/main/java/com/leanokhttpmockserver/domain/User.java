@@ -7,6 +7,13 @@ public class User {
     private Integer age;
     private String uniqueId;
 
+    public User(Integer id, String name, Integer age, String uniqueId) {
+        this.id = id;
+        this.name = name;
+        this.age = age;
+        this.uniqueId = uniqueId;
+    }
+
     public String getUniqueId() {
         return uniqueId;
     }
