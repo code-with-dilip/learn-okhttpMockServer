@@ -40,7 +40,6 @@ public class UserServiceMockTest {
         when(requestHeadersSpec.retrieve()).thenReturn(responseSpec);
         when(responseSpec.bodyToMono(User.class)).thenReturn(Mono.just(new User(100, "Adam", 32,"Sdafdf")));
 
-
         //when
         User user = userService.getUserByName(name);
 

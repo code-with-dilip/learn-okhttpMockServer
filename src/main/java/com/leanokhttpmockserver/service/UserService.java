@@ -3,13 +3,8 @@ package com.leanokhttpmockserver.service;
 import com.leanokhttpmockserver.domain.User;
 import org.springframework.web.reactive.function.client.WebClient;
 import org.springframework.web.util.UriComponentsBuilder;
-import reactor.core.publisher.Flux;
 
-import java.net.URI;
-import java.util.List;
-import java.util.UUID;
-
-import static com.leanokhttpmockserver.constants.OkHttpMockWebServerConstants.*;
+import static com.leanokhttpmockserver.constants.OkHttpMockWebServerConstants.USER_URL;
 
 
 public class UserService {
@@ -32,14 +27,9 @@ public class UserService {
                 .queryParam("name",name)
                 .buildAndExpand()
                 .toUri().toString();
-        System.out.println("uri : " + uri);
-        WebClient.RequestHeadersUriSpec requestHeadersUriSpec = webClient.get();
-        User user = requestHeadersUriSpec.uri(uri)
-                .retrieve()
-                .bodyToMono(User.class)
-                .block();
 
-        return webClient.get().uri(uri)
+        return webClient.get()
+                .uri(uri)
                 .retrieve()
                 .bodyToMono(User.class)
                 .block();
