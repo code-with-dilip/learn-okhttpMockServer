@@ -23,7 +23,7 @@ public class UserService {
 
     public User getUserByName(String name) {
 
-        String uri = UriComponentsBuilder.fromUriString(url+USER_URL)
+        String uri = UriComponentsBuilder.fromUriString(USER_URL)
                 .queryParam("name",name)
                 .buildAndExpand()
                 .toUri().toString();

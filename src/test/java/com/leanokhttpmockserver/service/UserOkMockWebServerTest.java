@@ -25,7 +25,7 @@ public class UserOkMockWebServerTest {
     public void setUp() {
 
         final String baseUrl = String.format("http://localhost:%s", server.getPort());
-        webClient = WebClient.create();
+        webClient = WebClient.create(baseUrl);
         userService = new UserService(baseUrl, webClient);
     }
 
